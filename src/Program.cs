@@ -47,6 +47,7 @@ while (true)
         var opponentOption = (JoKenPoOptions)rnd.Next(1, 3);
 
         Console.WriteLine("Rock, Paper, Scissors !");
+        System.Threading.Thread.Sleep(1000);
 
         if (playerOption == opponentOption)
         {
