@@ -3,8 +3,17 @@
 Console.WriteLine("Welcome to the CSharp Jo Ken Po");
 Random rnd = new Random();
 
+int playerScore = 0;
+int opponentScore = 0;
+
 while (true)
 {
+    if (playerScore > 0 || opponentScore > 0)
+    {
+        Console.WriteLine("Current Score:");
+        Console.WriteLine(string.Format("Player: {0} x {1} Opponent", playerScore, opponentScore));
+    }
+
     Console.WriteLine("Please choose an option:");
     Console.WriteLine("1 - Rock");
     Console.WriteLine("2 - Paper");
@@ -12,9 +21,23 @@ while (true)
     Console.WriteLine("4 - Exit");
 
     string? choice = Console.ReadLine();
+    Console.Clear();
 
     if (choice == "4")
     {
+        if (playerScore > opponentScore)
+        {
+            Console.WriteLine("You won the game !");
+        }
+        else if (playerScore == opponentScore)
+        {
+            Console.WriteLine("The game ended in a draw !");
+        }
+        else
+        {
+            Console.WriteLine("You lost the game !");
+        }
+
         break;
     }
 
@@ -35,11 +58,13 @@ while (true)
         || playerOption == JoKenPoOptions.Paper && opponentOption == JoKenPoOptions.Rock
         || playerOption == JoKenPoOptions.Scissors && opponentOption == JoKenPoOptions.Paper)
         {
-            Console.WriteLine("You Won the game !");
+            Console.WriteLine("You Won !");
+            playerScore += 1;
             continue;
         }
 
-        Console.WriteLine("You Lost the game !");
+        Console.WriteLine("You Lost !");
+        1 += 1;
         continue;
     }
 
