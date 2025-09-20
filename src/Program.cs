@@ -13,13 +13,14 @@ while (true)
 
     string? choice = Console.ReadLine();
 
-    if (Enum.TryParse(choice, out JoKenPoOptions playerOption))
+    if (choice == "4")
     {
-        if (!Enum.IsDefined(playerOption))
-        {
-            break;
-        }
+        break;
+    }
 
+    if (Enum.TryParse(choice, out JoKenPoOptions playerOption)
+        && Enum.IsDefined(playerOption))
+    {
         var opponentOption = (JoKenPoOptions)rnd.Next(1, 3);
 
         Console.WriteLine("Rock, Paper, Scissors !");
@@ -39,5 +40,8 @@ while (true)
         }
 
         Console.WriteLine("You Lost the game !");
+        continue;
     }
+
+    Console.WriteLine("Invalid input. Please enter a number.");
 }
