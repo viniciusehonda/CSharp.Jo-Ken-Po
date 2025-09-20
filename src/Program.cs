@@ -64,7 +64,7 @@ while (true)
         }
 
         Console.WriteLine("You Lost !");
-        1 += 1;
+        opponentScore += 1;
         continue;
     }
 
