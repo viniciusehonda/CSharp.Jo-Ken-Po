@@ -33,3 +33,5 @@ Other
 Exclude .csproj.user and .sln.user files
 *.csproj.user
 *.sln.user
+
+*.zip
