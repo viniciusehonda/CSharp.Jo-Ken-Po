@@ -8,5 +8,5 @@ public class PredictionResult
     public float PredictedNextMove;
 
     [ColumnName("Score")]
-    public float[] Scores;
+    public float[] Scores = [];
 }
