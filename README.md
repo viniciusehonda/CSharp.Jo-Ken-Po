@@ -1,5 +1,6 @@
 # Jo Ken Po Game
-A simple console application that lets you play the classic game of Rock, Paper, Scissors (Jo Ken Po) against the computer. Using ML.Net to predict player moves with weighted probabilistic choices to prevent player of predicting the computed choice.
+🎮 A simple console application that lets you play the classic game of Rock, Paper, Scissors (Jo Ken Po) against the computer. 
+🤖 Using ML.Net to predict player moves with weighted probabilistic choices to prevent player of predicting the computed choice.
 
 ## How to Play
 Start the application from your terminal or command prompt.
