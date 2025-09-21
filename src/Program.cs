@@ -6,6 +6,8 @@ using System.Linq;
 
 public class Program
 {
+    const int _maxPlayerHistoryBuffer = 3;
+
     private static void Main(string[] args)
     {
         Console.WriteLine("Welcome to the CSharp Jo Ken Po");
@@ -60,7 +62,7 @@ public class Program
             {
                 var opponentOption = (JoKenPoOptions)rnd.Next(1, 4);
 
-                if (playerHistory.Count >= 3)
+                if (playerHistory.Count >= _maxPlayerHistoryBuffer)
                 {
                     var input = new GameData
                     {
@@ -70,9 +72,15 @@ public class Program
                     };
 
                     var prediction = predictionEngine.Predict(input);
-                    var predictedPlayerMove = (JoKenPoOptions)prediction.PredictedNextMove;
 
-                    opponentOption = GetWinningMove(predictedPlayerMove);
+                    var movesWithProbabilities = new List<(JoKenPoOptions Option, float Probability)>
+                    {
+                        (GetWinningMove(JoKenPoOptions.Rock), prediction.Scores[0]),
+                        (GetWinningMove(JoKenPoOptions.Paper), prediction.Scores[1]),
+                        (GetWinningMove(JoKenPoOptions.Scissors), prediction.Scores[2])
+                    };
+
+                    opponentOption = GetWeightedRandomChoice(movesWithProbabilities);
                 }
 
                 playerHistory.Add(playerOption);
@@ -113,5 +121,23 @@ public class Program
             JoKenPoOptions.Scissors => JoKenPoOptions.Rock,
             _ => JoKenPoOptions.Rock,
         };
+    }
+
+    private static JoKenPoOptions GetWeightedRandomChoice(List<(JoKenPoOptions Option, float Probability)> choices)
+    {
+        var totalProbability = choices.Sum(c => c.Probability);
+        var randomValue = new Random().NextDouble() * totalProbability;
+        var cumulativeProbability = 0.0;
+
+        foreach (var choice in choices.OrderByDescending(c => c.Probability))
+        {
+            cumulativeProbability += choice.Probability;
+            if (randomValue <= cumulativeProbability)
+            {
+                return choice.Option;
+            }
+        }
+
+        return choices.OrderByDescending(c => c.Probability).First().Option;
     }
 }

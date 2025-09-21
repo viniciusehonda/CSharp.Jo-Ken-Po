@@ -6,4 +6,7 @@ public class PredictionResult
 {
     [ColumnName("PredictedLabel")]
     public float PredictedNextMove;
+
+    [ColumnName("Score")]
+    public float[] Scores;
 }
