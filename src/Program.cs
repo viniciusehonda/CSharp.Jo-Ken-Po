@@ -94,17 +94,15 @@ public class Program
                     continue;
                 }
 
-                if (playerOption == JoKenPoOptions.Rock && opponentOption == JoKenPoOptions.Scissors
-                || playerOption == JoKenPoOptions.Paper && opponentOption == JoKenPoOptions.Rock
-                || playerOption == JoKenPoOptions.Scissors && opponentOption == JoKenPoOptions.Paper)
+                if (GetWinningMove(playerOption) == opponentOption)
                 {
-                    Console.WriteLine("You Won !");
-                    playerScore += 1;
+                    Console.WriteLine("You Lost !");
+                    opponentScore += 1;
                     continue;
                 }
 
-                Console.WriteLine("You Lost !");
-                opponentScore += 1;
+                Console.WriteLine("You Won !");
+                playerScore += 1;
                 continue;
             }
 
@@ -112,9 +110,9 @@ public class Program
         }
     }
 
-    public static JoKenPoOptions GetWinningMove(JoKenPoOptions predictedMove)
+    public static JoKenPoOptions GetWinningMove(JoKenPoOptions option)
     {
-        return predictedMove switch
+        return option switch
         {
             JoKenPoOptions.Rock => JoKenPoOptions.Paper,
             JoKenPoOptions.Paper => JoKenPoOptions.Scissors,
